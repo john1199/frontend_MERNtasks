@@ -4,7 +4,7 @@ import proyectoContext from "../../context/proyectos/proyectoContext";
 
 const ListadoTareas = () => {
   const proyectosContext = useContext(proyectoContext);
-  const { proyecto } = proyectosContext;
+  const { proyecto, eliminarProyecto } = proyectosContext;
   if (!proyecto) return <h2>Selecciona un nuevo proyecto</h2>;
   //Array destructuring
   const [proyectoActual] = proyecto;
@@ -26,7 +26,11 @@ const ListadoTareas = () => {
           tareas.map((tarea) => <Tarea tarea={tarea} />)
         )}
       </ul>
-      <button type="button" className="btn btn-eliminar">
+      <button
+        type="button"
+        className="btn btn-eliminar"
+        onClick={() => eliminarProyecto(proyectoActual.id)}
+      >
         Eliminar Proyectos &times;
       </button>
     </>

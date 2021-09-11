@@ -9,8 +9,8 @@ const ListadoProyectos = () => {
   useEffect(() => {
     obtenerProyectos();
   }, []);
-  
-  if (proyectos.length === 0) return null;
+
+  if (proyectos.length === 0) return <h2>No hay proyectos, crea uno!</h2>;
 
   return (
     <ul className="listado-proyectos">
