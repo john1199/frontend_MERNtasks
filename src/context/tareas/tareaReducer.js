@@ -1,4 +1,8 @@
-import { TAREAS_PROYECTO } from "../../types";
+import {
+  TAREAS_PROYECTO,
+  AGREGAR_TAREA,
+  VALIDAR_FORM_TAREA,
+} from "../../types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -8,6 +12,17 @@ export default (state, action) => {
         tareasProyecto: state.tareas.filter(
           (tarea) => tarea.proyectoId === action.payload
         ),
+      };
+    case AGREGAR_TAREA:
+      return {
+        ...state,
+        tareas: [...state.tareas, action.payload],
+        errorTarea: false,
+      };
+    case VALIDAR_FORM_TAREA:
+      return {
+        ...state,
+        errorTarea: true,
       };
     default:
       return state;
