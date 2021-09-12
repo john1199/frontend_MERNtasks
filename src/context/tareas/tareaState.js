@@ -5,18 +5,19 @@ import {
   TAREAS_PROYECTO,
   AGREGAR_TAREA,
   VALIDAR_FORM_TAREA,
+  ELIMINAR_TAREA,
 } from "../../types";
 
 const tareas = [
-  { nombre: "Plataforma", estado: true, proyectoId: 4 },
-  { nombre: "Colores", estado: false, proyectoId: 4 },
-  { nombre: "Pago", estado: true, proyectoId: 3 },
-  { nombre: "Hosting", estado: false, proyectoId: 2 },
-  { nombre: "Colores", estado: false, proyectoId: 3 },
-  { nombre: "Pago", estado: true, proyectoId: 2 },
-  { nombre: "Pago", estado: true, proyectoId: 1 },
-  { nombre: "Hosting", estado: false, proyectoId: 2 },
-  { nombre: "Plataforma", estado: true, proyectoId: 1 },
+  { id: 1, nombre: "Plataforma", estado: true, proyectoId: 4 },
+  { id: 2, nombre: "Colores", estado: false, proyectoId: 4 },
+  { id: 3, nombre: "Pago", estado: true, proyectoId: 3 },
+  { id: 4, nombre: "Hosting", estado: false, proyectoId: 2 },
+  { id: 5, nombre: "Colores", estado: false, proyectoId: 3 },
+  { id: 6, nombre: "Pago", estado: true, proyectoId: 2 },
+  { id: 7, nombre: "Pago", estado: true, proyectoId: 1 },
+  { id: 8, nombre: "Hosting", estado: false, proyectoId: 2 },
+  { id: 9, nombre: "Plataforma", estado: true, proyectoId: 1 },
 ];
 const TareaState = (props) => {
   const initialState = {
@@ -34,8 +35,13 @@ const TareaState = (props) => {
   const agregarTarea = (tarea) => {
     dispatch({ type: AGREGAR_TAREA, payload: tarea });
   };
+
   const mostrarError = () => {
     dispatch({ type: VALIDAR_FORM_TAREA });
+  };
+
+  const eliminarTarea = (id) => {
+    dispatch({ type: ELIMINAR_TAREA, payload: id });
   };
   return (
     <tareaContext.Provider
@@ -46,6 +52,7 @@ const TareaState = (props) => {
         obtenerTareas,
         agregarTarea,
         mostrarError,
+        eliminarTarea,
       }}
     >
       {props.children}
