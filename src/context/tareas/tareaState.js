@@ -1,11 +1,16 @@
 import React, { useReducer } from "react";
 import tareaContext from "./tareaContext";
 import tareaReducer from "./tareaReducer";
+import { v4 as uuid } from "uuid";
 import {
   TAREAS_PROYECTO,
   AGREGAR_TAREA,
   VALIDAR_FORM_TAREA,
   ELIMINAR_TAREA,
+  ESTADO_TAREA,
+  TAREA_ACTUAL,
+  ACTUALIZAR_TAREA,
+  LIMPIAR_TAREA,
 } from "../../types";
 
 const tareas = [
@@ -24,6 +29,7 @@ const TareaState = (props) => {
     tareas: tareas,
     tareasProyecto: null,
     errorTarea: false,
+    tareaActual: null,
   };
 
   const [state, dispatch] = useReducer(tareaReducer, initialState);
@@ -33,6 +39,7 @@ const TareaState = (props) => {
   };
 
   const agregarTarea = (tarea) => {
+    tarea.id = uuid();
     dispatch({ type: AGREGAR_TAREA, payload: tarea });
   };
 
@@ -43,16 +50,33 @@ const TareaState = (props) => {
   const eliminarTarea = (id) => {
     dispatch({ type: ELIMINAR_TAREA, payload: id });
   };
+  const estadoTarea = (tarea) => {
+    dispatch({ type: ESTADO_TAREA, payload: tarea });
+  };
+  const obtenerTareaActual = (tarea) => {
+    dispatch({ type: TAREA_ACTUAL, payload: tarea });
+  };
+  const actualizarTarea = (tarea) => {
+    dispatch({ type: ACTUALIZAR_TAREA, payload: tarea });
+  };
+  const limpiarTarea = () => {
+    dispatch({ type: LIMPIAR_TAREA });
+  };
   return (
     <tareaContext.Provider
       value={{
         tareas: state.tareas,
         tareasProyecto: state.tareasProyecto,
         errorTarea: state.errorTarea,
+        tareaActual: state.tareaActual,
         obtenerTareas,
         agregarTarea,
         mostrarError,
         eliminarTarea,
+        estadoTarea,
+        obtenerTareaActual,
+        actualizarTarea,
+        limpiarTarea,
       }}
     >
       {props.children}
