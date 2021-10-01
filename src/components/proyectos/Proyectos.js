@@ -8,8 +8,10 @@ import AuthContext from "../../context/auth/authContext";
 const Proyectos = () => {
   const authContext = useContext(AuthContext);
   const { usuario, obtenerAutenticado, cerrarSesion } = authContext;
+  
   useEffect(() => {
     obtenerAutenticado();
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="contenedor-app">

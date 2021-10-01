@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import authReducer from "./authReducer";
 import authContext from "./authContext";
 import clienteAxios from "../../config/axios";
@@ -58,7 +58,7 @@ const AuthState = (props) => {
       });
     } catch (error) {
       const alerta = {
-        msg: error.response.data.msg,
+        msg: error.response,
         categoria: "alerta-error",
       };
       dispatch({

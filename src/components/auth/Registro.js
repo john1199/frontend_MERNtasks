@@ -17,7 +17,7 @@ const Registro = (props) => {
     if (msg) {
       mostrarAlerta(msg.msg, msg.categoria);
     }
-  }, [msg, autenticado, props.history]);
+  }, [msg, autenticado,mostrarAlerta, props.history]);
 
   const [usuario, setUsuario] = useState({
     nombre: "",

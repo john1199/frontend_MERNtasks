@@ -3,12 +3,13 @@ import { Route, Redirect } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 
 const RutaPrivada = ({ component: Component, ...props }) => {
-  console.log(props);
+  //console.log(props);
 
   const authContext = useContext(AuthContext);
   const { autenticado, loading, obtenerAutenticado } = authContext;
   useEffect(() => {
     obtenerAutenticado();
+    // eslint-disable-next-line
   }, []);
   return (
     <Route
