@@ -1,13 +1,17 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({ usuario, cerrarSesion }) => {
   return (
     <header className="app-header">
-      <p className="nombre-usuario">
-        Hola <span>John Riaño</span>
-      </p>
+      {usuario ? (
+        <p className="nombre-usuario">
+          Hola <span>{usuario.nombre}</span>
+        </p>
+      ) : (
+        <p className="nombre-usuario">Hola</p>
+      )}
       <nav className="nav-principal">
-        <a href="#!">Cerrar Sesión</a>
+        <button className="btn btn-blank cerrar-sesion" onClick={()=> cerrarSesion()}>Cerrar Sesion</button>
       </nav>
     </header>
   );

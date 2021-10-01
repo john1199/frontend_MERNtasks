@@ -1,10 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/auth/authContext";
 
-const Registro = () => {
+const Registro = (props) => {
   const alertaContext = useContext(AlertaContext);
   const { alerta, mostrarAlerta } = alertaContext;
+
+  const authContext = useContext(AuthContext);
+  const { msg, autenticado, registrarUsuario } = authContext;
+
+  useEffect(() => {
+    if (autenticado) {
+      props.history.push("/proyectos");
+    }
+    if (msg) {
+      mostrarAlerta(msg.msg, msg.categoria);
+    }
+  }, [msg, autenticado, props.history]);
 
   const [usuario, setUsuario] = useState({
     nombre: "",
@@ -39,6 +52,11 @@ const Registro = () => {
       mostrarAlerta("Las contraseñas no son iguales", "error");
       return;
     }
+    registrarUsuario({
+      nombre,
+      email,
+      password,
+    });
   };
 
   return (
