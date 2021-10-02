@@ -49,15 +49,14 @@ const FormTarea = () => {
       return;
     }
     if (tareaActual === null) {
-      tarea.proyectoId = proyectoActual.id;
-      tarea.estado = false;
+      tarea.proyectoId = proyectoActual._id;
       agregarTarea(tarea);
     } else {
       actualizarTarea(tarea);
       limpiarTarea();
     }
 
-    obtenerTareas(proyectoActual.id);
+    obtenerTareas(proyectoActual._id);
     setTarea({
       nombre: "",
     });

@@ -6,12 +6,13 @@ const Tarea = ({ tarea }) => {
   const proyectosContext = useContext(proyectoContext);
   const { proyecto } = proyectosContext;
   const tareasContext = useContext(tareaContext);
-  const { obtenerTareas, eliminarTarea, estadoTarea, obtenerTareaActual } =
-    tareasContext;
+  const { eliminarTarea, actualizarTarea, obtenerTareaActual } = tareasContext;
+  //array of objects to array
+  const [proyectoActual] = proyecto;
 
-  const onClickEliminar = () => {
-    eliminarTarea(tarea.id);
-    obtenerTareas(proyecto[0].id);
+  const onClickEliminar = (id) => {
+    eliminarTarea(id, proyectoActual._id);
+    //  obtenerTareas(proyectoActual._id);
   };
   const onClickEstado = (tarea) => {
     if (tarea.estado) {
@@ -19,7 +20,7 @@ const Tarea = ({ tarea }) => {
     } else {
       tarea.estado = true;
     }
-    estadoTarea(tarea);
+    actualizarTarea(tarea);
   };
   const onClickEditar = (tarea) => {
     obtenerTareaActual(tarea);
@@ -57,7 +58,7 @@ const Tarea = ({ tarea }) => {
         <button
           type="button"
           className="btn btn-secundario"
-          onClick={onClickEliminar}
+          onClick={() => onClickEliminar(tarea._id)}
         >
           Eliminar
         </button>

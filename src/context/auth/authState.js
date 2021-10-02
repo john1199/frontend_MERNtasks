@@ -58,7 +58,7 @@ const AuthState = (props) => {
       });
     } catch (error) {
       const alerta = {
-        msg: error.response,
+        msg: error.response.data.msg,
         categoria: "alerta-error",
       };
       dispatch({
@@ -71,7 +71,6 @@ const AuthState = (props) => {
   const iniciarSesion = async (user) => {
     try {
       const res = await clienteAxios.post("api/auth", user);
-      console.log(res);
       dispatch({
         type: LOGIN_EXITOSO,
         payload: res.data.token,
